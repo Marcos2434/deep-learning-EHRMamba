@@ -1,3 +1,22 @@
+# deep-learning-ERM
+This is an academic project for course 02456 Deep Learning at the Technical University of Denmark. 
+
+Deep State Space Model for Mortality Classification using Electronic Health Records. 
+Electronic Health Records (EHRs) are an abundant resource for clinical research, and are produced in increasing numbers around the world. Unfortunately, they are also noisy, collected at irregular times, and full of missing data points, making them challenging to learn from. Despite these issues, EHR data contains valuable information for patient outcome forecasting, disease classification, and imputation. As a result, many models have been developed to handle these tasks.
+For classification, most state-of-the-art models are RNNS, particularly variations of the LSTM and GRU architectures (ex:GRU-D, P-LSTM). The ability to handle variable input lengths and retain context from previous measurements is widely speculated to contribute to their dominance, but they are relatively slow and computationally expensive.
+
+Recent advances in deep state space models (SSMs) have great potential for modeling time series. Similarly to RNNS, SSMs capture temporal dependencies and handle missing values by estimating hidden states from previous data. By learning the underlying state of the system (ex., patient health) from the observed measurements (ex., vital signs, lab results), SSMs can model the hidden dynamics of a patient’s condition while accounting for noise and irregularity. But unlike RNNs, SSMs do this in a more structured and interpretable way by relying on probabilistic transitions between states. They are also more computationally efficient and scalable.
+        This project focuses on implementing a deep state space model for EHR mortality classification and comparing it to current state-of-the-art models. The model can be an adaptation of EHRMamba (easier) or implemented yourself (challenging). Preprocessed data from Physionet 2012, MIMIC-III, and code for several SOTA models will be readily available.
+
+Supervised by; Rachael Marie De Vries (rachael.devries@bio.ku.dk)
+
+Marcos Bauch Mira s215210, Jorge Grau Ramirez s243346
+
+
+
+
+
+
 # Selective_SSM_for_EHR_Classification
 Project 24 for 02456 2024. Slides from group meetings can be found here: https://docs.google.com/presentation/d/1yetlmIH0u_5zdRKiLDMxKVesZKkAbiG7j0vTfhUPhU0/edit?usp=sharing
 
