@@ -85,6 +85,58 @@ def core_function(
         train_pair, val_data, test_data = load_pad_separate(
             dataset_id, base_path_new, split_index
         )
+        
+        # Imprimir información del dataset cargado
+        print(f"Información del dataset (Split {split_index}):")
+        print(f"  - Train: {len(train_pair)} muestras")
+        print(f"  - Validation: {len(val_data)} muestras")
+        print(f"  - Test: {len(test_data)} muestras")
+
+        # Inspeccionar dimensiones, tipos y valores de las tuplas
+        def inspect_tuple(data_tuple, name="Ejemplo"):
+            print(f"  {name}:")
+            for i, element in enumerate(data_tuple):
+                element_type = type(element)
+                print(f"    - Elemento {i + 1}: tipo {element_type}")
+                if hasattr(element, 'shape'):  # Tensor o array con forma
+                    print(f"      Dimensiones: {element.shape}")
+                elif isinstance(element, (list, tuple)):  # Listas o tuplas
+                    print(f"      Longitud: {len(element)}")
+                else:
+                    print(f"      Valor: {element}")
+
+        # Inspeccionar la primera tupla de cada conjunto
+        if len(train_pair) > 0:
+            print("\nDatos del conjunto de entrenamiento:")
+            inspect_tuple(train_pair[0], name="Ejemplo del conjunto de entrenamiento")
+        if len(val_data) > 0:
+            print("\nDatos del conjunto de validación:")
+            inspect_tuple(val_data[0], name="Ejemplo del conjunto de validación")
+        if len(test_data) > 0:
+            print("\nDatos del conjunto de prueba:")
+            inspect_tuple(test_data[0], name="Ejemplo del conjunto de prueba")
+        
+        def inspect_tensor_data(data_tuple, name="Ejemplo"):
+            print(f"\n{name}:")
+            for i, element in enumerate(data_tuple):
+                print(f"  - Elemento {i + 1}:")
+                if hasattr(element, 'shape') and isinstance(element, torch.Tensor):
+                    print(f"    Tipo: Tensor")
+                    print(f"    Dimensiones: {element.shape}")
+                    if element.dim() == 2:  # Tensores 2D
+                        print(f"    Valores (primeros 10x20):\n{element[:10, :20]}")
+                    elif element.dim() == 1:  # Tensores 1D
+                        print(f"    Valores (todos): {element.tolist()}")
+                    elif element.dim() == 0:  # Tensores escalares
+                        print(f"    Valor: {element.item()}")
+                else:
+                    print(f"    Tipo: {type(element)}")
+                    print(f"    Valor: {element}")
+
+        # Inspeccionar una tupla del conjunto
+        if len(val_data) > 0:
+            print("\nEjemplo de valores en la primera tupla del conjunto de entrenamiento:")
+            inspect_tensor_data(val_data[0], name="Datos del conjunto de entrenamiento")
 
         # make necessary folders
         # if new model, make model folder
